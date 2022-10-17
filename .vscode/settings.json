@@ -1,0 +1,6 @@
+{
+  "liveServer.settings.port": 5501,
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": "file:///Users/user/Documents/workspace/remotedev/.github/workflows/deploy.yml"
+  }
+}

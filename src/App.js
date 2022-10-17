@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { CopyRightText, StyledContainer } from "./components/Style";
+
+import {
+  Home,
+  ResetPassword,
+  VerifyEmail,
+  ResendVerificationMail,
+} from "./pages";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <StyledContainer>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/verify-email/:token" element={<VerifyEmail />} />
+            <Route
+              path="/resend-verification-email"
+              element={<ResendVerificationMail />}
+            />
+            <Route path="/reset-password" element={<ResetPassword />} />
+          </Routes>
+          <CopyRightText>All rights reserved &copy; 2022</CopyRightText>
+        </StyledContainer>
+      </Router>
+    </>
   );
 }
 
