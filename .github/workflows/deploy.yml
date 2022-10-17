@@ -29,7 +29,7 @@ jobs:
       - name: Push to server
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: .next
+          local: build
           remote: /var/www/web.remotedev.team/html/
           host: ${{secrets.DEV_HOST}}
           username: ${{secrets.DEV_HOST_USER}}
