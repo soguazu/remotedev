@@ -21,7 +21,7 @@ const API_BASE_URL = process.env.REACT_APP_BASE_API_URL;
 
 function ResetPassword() {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const resetPasswordHandler = async (
     values,
