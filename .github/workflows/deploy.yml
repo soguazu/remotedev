@@ -30,7 +30,7 @@ jobs:
         uses: garygrossgarten/github-action-scp@release
         with:
           local: build
-          remote: /var/www/web.remotedev.team/html/
+          remote: /var/www/remotedev.team/html/
           host: ${{secrets.DEV_HOST}}
           username: ${{secrets.DEV_HOST_USER}}
           password: ${{secrets.DEV_HOST_PASSWORD}}
