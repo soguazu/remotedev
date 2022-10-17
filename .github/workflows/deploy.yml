@@ -1,38 +1,19 @@
-name: Deploy frontend
+name: Deploy app
 on:
   push:
-    branches:
-      - "develop"
+    branches: [develop]
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.x]
-
     steps:
-      - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: push to server and build
+        uses: appleboy/ssh-action@master
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install Packages
-        run: npm install
-      - name: Do Something with env files
-        env:
-          ENV_FILE: ${{ secrets.ENV_FILE }}
-        run: |
-          echo $ENV_FILE | base64 --decode > .env
-      - name: Build page
-        run: npm run build
-      - name: Push to server
-        uses: garygrossgarten/github-action-scp@release
-        with:
-          local: build
-          remote: /var/www/remotedev.team/html/
-          host: ${{secrets.DEV_HOST}}
-          username: ${{secrets.DEV_HOST_USER}}
-          password: ${{secrets.DEV_HOST_PASSWORD}}
-          port: ${{secrets.DEV_HOST_PORT}}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+          HOST: ${{ secrets.DEV_HOST }}
+          PORT: ${{ secrets.DEV_HOST_PORT }}
+          USERNAME: ${{ secrets.DEV_HOST_USER }}
+          PASSWORD: ${{ secrets.DEV_HOST_PASSWORD }}
+          script: cd ${{ secrets.DEV_HOST_HOME }} && git pull origin develop && npm start
