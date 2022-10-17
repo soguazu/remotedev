@@ -41,7 +41,7 @@ function VerifyEmail() {
 
   useEffect(() => {
     verifyEmail(location[2], loader, setLoader);
-  }, []);
+  }, [location, loader]);
 
   return (
     <div>
